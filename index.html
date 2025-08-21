@@ -53,7 +53,6 @@
       rel="stylesheet"
     />
 
-    <!-- AOS animations library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body class="bg-bg-primary text-text-primary font-body antialiased">
@@ -110,9 +109,9 @@
       <form
         name="contact"
         method="POST"
-        action="/"
-        netlify
-        netlify-honeypot="bot-field"
+        action="/success.html"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
         class="space-y-4"
         data-aos="fade-up"
         id="contact-form"
@@ -122,15 +121,24 @@
           <label>Don't fill this out: <input name="bot-field" /></label>
         </p>
 
-        <!-- Toast Notification -->
         <div
           id="toast-notification"
-          class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-4 py-2 bg-accent-gold text-text-primary rounded-[10px] shadow-lg transition-all duration-300 ease-in-out opacity-0 scale-90 pointer-events-none"
+          class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-4 py-2 rounded-[10px] shadow-lg transition-all duration-300 ease-in-out opacity-0 scale-90 pointer-events-none"
         >
-          <p class="font-headline text-center">We Move with Intention</p>
-          <p class="text-sm text-center">
-            Your message has been received. We appreciate your alignment.
-          </p>
+          <p id="toast-title" class="font-headline text-center"></p>
+          <p id="toast-message" class="text-sm text-center"></p>
+        </div>
+
+        <div
+          id="loading-spinner"
+          class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+        >
+          <div class="bg-white p-6 rounded-[10px] flex items-center space-x-3">
+            <div
+              class="animate-spin rounded-full h-6 w-6 border-b-2 border-accent-gold"
+            ></div>
+            <p class="text-text-primary">Sending message...</p>
+          </div>
         </div>
 
         <label for="name" class="sr-only">Your Name</label>
@@ -164,7 +172,8 @@
         ></textarea>
         <button
           type="submit"
-          class="w-full py-3 bg-text-primary text-white rounded-[10px] hover:bg-opacity-90 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold min-h-[44px]"
+          id="submit-button"
+          class="w-full py-3 bg-text-primary text-white rounded-[10px] hover:bg-opacity-90 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Submit contact form"
         >
           Submit
@@ -172,116 +181,13 @@
       </form>
     </section>
 
-    <!-- Form Submission Handling Script -->
-    <script>
-      // Toast Notification Utility
-      function showToast(message, type = "success") {
-        const toast = document.getElementById("toast-notification");
-
-        // Reset classes
-        toast.classList.remove(
-          "opacity-0",
-          "scale-90",
-          "bg-red-500",
-          "bg-accent-gold"
-        );
-        toast.classList.add("opacity-100", "scale-100");
-
-        // Set color based on type
-        if (type === "error") {
-          toast.classList.add("bg-red-500", "text-white");
-        } else {
-          toast.classList.add("bg-accent-gold", "text-text-primary");
-        }
-
-        // Show toast
-        toast.style.display = "block";
-
-        // Auto-hide after 5 seconds
-        setTimeout(() => {
-          toast.classList.remove("opacity-100", "scale-100");
-          toast.classList.add("opacity-0", "scale-90");
-
-          // Fully hide after transition
-          setTimeout(() => {
-            toast.style.display = "none";
-          }, 300);
-        }, 5000);
-      }
-
-      // Form Handling for Local and Production
-      document
-        .getElementById("contact-form")
-        .addEventListener("submit", function (e) {
-          // Always prevent default submission first
-          e.preventDefault();
-
-          // Check if we're in local development (file:// protocol or localhost)
-          const isLocal =
-            window.location.protocol === "file:" ||
-            window.location.hostname === "localhost" ||
-            window.location.hostname === "127.0.0.1" ||
-            window.location.hostname === "";
-
-          if (isLocal) {
-            // Simulate form submission for local testing
-            try {
-              // Clear form
-              this.querySelectorAll("input, textarea").forEach(
-                (el) => (el.value = "")
-              );
-
-              // Show success toast
-              showToast("Message sent successfully!");
-            } catch (error) {
-              // Show error toast
-              showToast("Error submitting form. Please try again.", "error");
-              console.error("Local form submission error:", error);
-            }
-          } else {
-            // For production/Netlify deployment, submit the form manually
-            const formData = new FormData(this);
-
-            fetch("/", {
-              method: "POST",
-              headers: { "Content-Type": "application/x-www-form-urlencoded" },
-              body: new URLSearchParams(formData).toString(),
-            })
-              .then((response) => {
-                if (response.ok) {
-                  // Clear form
-                  this.querySelectorAll("input, textarea").forEach(
-                    (el) => (el.value = "")
-                  );
-                  // Show success toast
-                  showToast("Message sent successfully!");
-                } else {
-                  throw new Error("Form submission failed");
-                }
-              })
-              .catch((error) => {
-                showToast("Error submitting form. Please try again.", "error");
-                console.error("Form submission error:", error);
-              });
-          }
-        });
-    </script>
-
-    <!-- Footer -->
     <footer class="bg-ocean-black text-white text-center py-6">
       <p class="text-sm font-light">© 2025 ACE Ventures</p>
     </footer>
 
-    <!-- AOS animations initialization -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init({
-        duration: 800,
-        once: true,
-      });
-    </script>
+    <script src="script.js"></script>
 
-    <!-- Custom spacing system -->
     <style>
       @media (max-width: 768px) {
         section:not(#hero) {
