@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ACE Ventures — Alignment over everything</title>
+    <meta
+      name="description"
+      content="Invitation-only holding company focused on building systems that endure. We create legacy, not just capital."
+    />
+    <meta property="og:title" content="ACE Ventures" />
+    <meta property="og:description" content="Alignment over everything." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aceventures.ai" />
+    <meta property="og:image" content="assets/og-image.png" />
+    <meta
+      property="og:image:alt"
+      content="ACE Ventures - Alignment over everything"
+    />
+    <meta property="og:site_name" content="ACE Ventures" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ACE Ventures" />
+    <meta name="twitter:description" content="Alignment over everything." />
+    <meta name="twitter:image" content="assets/og-image.png" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              headline: ["Playfair Display", "Georgia", "serif"],
+              body: ["Inter", "Helvetica Neue", "sans-serif"],
+              quote: ["Cormorant Garamond", "Georgia", "serif"],
+            },
+            colors: {
+              "bg-primary": "#FFFFFF",
+              "text-primary": "#1C1C1C",
+              "accent-gold": "#D4AF37",
+              "ocean-black": "#001F2D",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400&family=Cormorant+Garamond:ital@1&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- AOS animations library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body class="bg-bg-primary text-text-primary font-body antialiased">
+    <!-- Hero Section -->
+    <section
+      id="hero"
+      class="h-screen flex items-center justify-center text-center"
+    >
+      <h1
+        class="text-4xl md:text-6xl font-headline font-medium opacity-0 animate-fadeIn"
+      >
+        Alignment over everything.
+      </h1>
+    </section>
+
+    <!-- Essence Section -->
+    <section
+      id="essence"
+      class="max-w-2xl mx-auto px-4 my-12 md:my-24 text-center"
+    >
+      <p class="text-xl md:text-2xl font-light" data-aos="fade-up">
+        We don't chase capital. We create systems that endure.
+      </p>
+    </section>
+
+    <!-- Quote Section -->
+    <section
+      id="quote"
+      class="max-w-2xl mx-auto px-4 my-12 md:my-24 text-center"
+    >
+      <blockquote
+        class="text-2xl md:text-3xl font-quote italic relative"
+        data-aos="fade-up"
+      >
+        "I don't care about money. I care about legacy."
+        <div
+          class="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 w-20 bg-accent-gold"
+        ></div>
+      </blockquote>
+    </section>
+
+    <!-- Invitation Section -->
+    <section
+      id="invitation"
+      class="max-w-2xl mx-auto px-4 my-12 md:my-24 text-center"
+    >
+      <p class="text-xl md:text-2xl font-light" data-aos="fade-up">
+        We don't accept inbound capital—but we do accept alignment.
+      </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="max-w-2xl mx-auto px-4 my-12 md:my-24">
+      <form
+        name="contact"
+        method="POST"
+        action="/"
+        netlify
+        netlify-honeypot="bot-field"
+        class="space-y-4"
+        data-aos="fade-up"
+        id="contact-form"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden">
+          <label>Don't fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <!-- Toast Notification -->
+        <div
+          id="toast-notification"
+          class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-4 py-2 bg-accent-gold text-text-primary rounded-[10px] shadow-lg transition-all duration-300 ease-in-out opacity-0 scale-90 pointer-events-none"
+        >
+          <p class="font-headline text-center">We Move with Intention</p>
+          <p class="text-sm text-center">
+            Your message has been received. We appreciate your alignment.
+          </p>
+        </div>
+
+        <label for="name" class="sr-only">Your Name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          placeholder="Name"
+          required
+          aria-label="Your Name"
+          class="w-full px-4 py-3 border border-gray-300 rounded-[10px] focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-accent-gold min-h-[44px]"
+        />
+        <label for="email" class="sr-only">Your Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          aria-label="Your Email"
+          class="w-full px-4 py-3 border border-gray-300 rounded-[10px] focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-accent-gold min-h-[44px]"
+        />
+        <label for="message" class="sr-only">Your Message</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Message"
+          required
+          aria-label="Your Message"
+          class="w-full px-4 py-3 border border-gray-300 rounded-[10px] h-32 focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-accent-gold"
+        ></textarea>
+        <button
+          type="submit"
+          class="w-full py-3 bg-text-primary text-white rounded-[10px] hover:bg-opacity-90 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold min-h-[44px]"
+          aria-label="Submit contact form"
+        >
+          Submit
+        </button>
+      </form>
+    </section>
+
+    <!-- Form Submission Handling Script -->
+    <script>
+      // Toast Notification Utility
+      function showToast(message, type = "success") {
+        const toast = document.getElementById("toast-notification");
+
+        // Reset classes
+        toast.classList.remove(
+          "opacity-0",
+          "scale-90",
+          "bg-red-500",
+          "bg-accent-gold"
+        );
+        toast.classList.add("opacity-100", "scale-100");
+
+        // Set color based on type
+        if (type === "error") {
+          toast.classList.add("bg-red-500", "text-white");
+        } else {
+          toast.classList.add("bg-accent-gold", "text-text-primary");
+        }
+
+        // Show toast
+        toast.style.display = "block";
+
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+          toast.classList.remove("opacity-100", "scale-100");
+          toast.classList.add("opacity-0", "scale-90");
+
+          // Fully hide after transition
+          setTimeout(() => {
+            toast.style.display = "none";
+          }, 300);
+        }, 5000);
+      }
+
+      // Form Handling for Local and Production
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", function (e) {
+          // Always prevent default submission first
+          e.preventDefault();
+
+          // Check if we're in local development (file:// protocol or localhost)
+          const isLocal =
+            window.location.protocol === "file:" ||
+            window.location.hostname === "localhost" ||
+            window.location.hostname === "127.0.0.1" ||
+            window.location.hostname === "";
+
+          if (isLocal) {
+            // Simulate form submission for local testing
+            try {
+              // Clear form
+              this.querySelectorAll("input, textarea").forEach(
+                (el) => (el.value = "")
+              );
+
+              // Show success toast
+              showToast("Message sent successfully!");
+            } catch (error) {
+              // Show error toast
+              showToast("Error submitting form. Please try again.", "error");
+              console.error("Local form submission error:", error);
+            }
+          } else {
+            // For production/Netlify deployment, submit the form manually
+            const formData = new FormData(this);
+
+            fetch("/", {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: new URLSearchParams(formData).toString(),
+            })
+              .then((response) => {
+                if (response.ok) {
+                  // Clear form
+                  this.querySelectorAll("input, textarea").forEach(
+                    (el) => (el.value = "")
+                  );
+                  // Show success toast
+                  showToast("Message sent successfully!");
+                } else {
+                  throw new Error("Form submission failed");
+                }
+              })
+              .catch((error) => {
+                showToast("Error submitting form. Please try again.", "error");
+                console.error("Form submission error:", error);
+              });
+          }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-ocean-black text-white text-center py-6">
+      <p class="text-sm font-light">© 2025 ACE Ventures</p>
+    </footer>
+
+    <!-- AOS animations initialization -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: true,
+      });
+    </script>
+
+    <!-- Custom spacing system -->
+    <style>
+      @media (max-width: 768px) {
+        section:not(#hero) {
+          margin: 12vh 5vw !important;
+        }
+      }
+
+      @media (min-width: 769px) {
+        section:not(#hero) {
+          margin: 25vh auto !important;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .animate-fadeIn {
+        animation: fadeIn 800ms ease-out forwards;
+      }
+    </style>
+  </body>
+</html>
