@@ -13,7 +13,10 @@ function showToast(title, message, type = "success") {
     "opacity-0",
     "scale-90",
     "bg-red-500",
-    "bg-accent-gold"
+    "bg-accent-gold",
+    "bg-ocean-black",
+    "text-white",
+    "text-text-primary"
   );
   toast.classList.add("opacity-100", "scale-100");
 
@@ -21,7 +24,8 @@ function showToast(title, message, type = "success") {
   if (type === "error") {
     toast.classList.add("bg-red-500", "text-white");
   } else {
-    toast.classList.add("bg-accent-gold", "text-text-primary");
+    // Use ocean-black for success/info to avoid gold overuse
+    toast.classList.add("bg-ocean-black", "text-white");
   }
 
   // Show toast

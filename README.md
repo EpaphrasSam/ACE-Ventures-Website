@@ -28,6 +28,15 @@ A minimalist, intentional digital presence designed to attract aligned venture c
 - Subtle, professional animations
 - WCAG AA compliant
 
+## Design Decisions
+
+- Direction: Analytical Minimal (serious, systematic, text-first)
+- Typography: Playfair (headers) + Inter (body); no additional quote font in MVP
+- Philosophy: Static sections; no rotating headlines
+- Color usage: One gold accent per viewport (quote underline only); ocean-black footer; neutral UI focus and states
+- Motion: Subtle fade-in/up only (600–800ms), once per element
+- Form: Netlify Forms + honeypot + success page; one-line privacy note
+
 ## Local Development
 
 ### Prerequisites
@@ -40,10 +49,10 @@ A minimalist, intentional digital presence designed to attract aligned venture c
 
 1. Clone the repository
 
-   ```bash
-   git clone https://github.com/your-org/ace-ventures-website.git
-   cd ace-ventures-website
-   ```
+```bash
+git clone https://github.com/EpaphrasSam/ACE-Ventures-Website.git
+cd "ACE Ventures Website"
+```
 
 2. Open `index.html` directly in a browser
    - No build process required
@@ -71,9 +80,8 @@ A minimalist, intentional digital presence designed to attract aligned venture c
 
 ## Customization
 
-- Modify typography in Tailwind config
-- Adjust color palette in `tailwind.config.js`
-- Update content in `index.html`
+- Modify typography and color palette in the inline Tailwind config inside `index.html`
+- Update content directly in `index.html`
 
 ## Performance Optimization
 
