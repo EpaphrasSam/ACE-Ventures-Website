@@ -54,6 +54,23 @@ function hideLoader() {
   document.getElementById("submit-button").disabled = false;
 }
 
+// Scroll Arrow Visibility Logic
+function handleScrollArrowVisibility() {
+  const scrollArrow = document.getElementById("scroll-arrow");
+  const heroSection = document.getElementById("hero");
+
+  if (!scrollArrow || !heroSection) return;
+
+  const heroRect = heroSection.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+
+  if (heroRect.top <= 0 && heroRect.bottom >= windowHeight) {
+    scrollArrow.style.opacity = "1";
+  } else {
+    scrollArrow.style.opacity = "0";
+  }
+}
+
 // Form Handling for Local and Production
 document
   .getElementById("contact-form")
@@ -107,4 +124,12 @@ document
 AOS.init({
   duration: 800,
   once: true,
+});
+
+// Add scroll event listener for arrow visibility
+window.addEventListener("scroll", handleScrollArrowVisibility);
+
+// Initial check for arrow visibility
+document.addEventListener("DOMContentLoaded", function () {
+  handleScrollArrowVisibility();
 });
