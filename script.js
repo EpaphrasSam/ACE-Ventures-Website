@@ -54,6 +54,42 @@ function hideLoader() {
   document.getElementById("submit-button").disabled = false;
 }
 
+// Mobile Menu Toggle
+function toggleMobileMenu() {
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+
+  if (mobileMenu.classList.contains("hidden")) {
+    mobileMenu.classList.remove("hidden");
+    // Change hamburger to X
+    mobileMenuButton.innerHTML = `
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    `;
+  } else {
+    mobileMenu.classList.add("hidden");
+    // Change X back to hamburger
+    mobileMenuButton.innerHTML = `
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    `;
+  }
+}
+
+// Smooth Scrolling for Navigation Links
+function smoothScrollTo(targetId) {
+  const target = document.querySelector(targetId);
+  if (target) {
+    const offsetTop = target.offsetTop - 80; // Account for fixed header
+    window.scrollTo({
+      top: offsetTop,
+      behavior: "smooth",
+    });
+  }
+}
+
 // Scroll Arrow Visibility Logic
 function handleScrollArrowVisibility() {
   const scrollArrow = document.getElementById("scroll-arrow");
@@ -132,4 +168,26 @@ window.addEventListener("scroll", handleScrollArrowVisibility);
 // Initial check for arrow visibility
 document.addEventListener("DOMContentLoaded", function () {
   handleScrollArrowVisibility();
+
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  if (mobileMenuButton) {
+    mobileMenuButton.addEventListener("click", toggleMobileMenu);
+  }
+
+  // Smooth scrolling for navigation links
+  const navLinks = document.querySelectorAll('a[href^="#"]');
+  navLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href");
+      smoothScrollTo(targetId);
+
+      // Close mobile menu if open
+      const mobileMenu = document.getElementById("mobile-menu");
+      if (!mobileMenu.classList.contains("hidden")) {
+        toggleMobileMenu();
+      }
+    });
+  });
 });

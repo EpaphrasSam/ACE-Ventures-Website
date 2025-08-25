@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ACE Ventures — Message Sent</title>
+    <title>Message Sent — ACE Ventures</title>
+    <meta
+      name="description"
+      content="Your message has been sent to ACE Ventures."
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -24,27 +29,50 @@
       };
     </script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body
-    class="bg-bg-primary text-text-primary font-body antialiased flex items-center justify-center min-h-screen"
-  >
-    <div class="text-center max-w-xl px-4">
-      <h1 class="text-3xl md:text-4xl font-headline mb-6">
+  <body class="bg-bg-primary text-text-primary font-body antialiased">
+    <!-- Minimal header -->
+    <header class="border-b border-gray-100">
+      <div
+        class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between"
+      >
+        <a href="/" class="flex items-center space-x-2">
+          <img
+            src="assets/logo.png"
+            alt="ACE Ventures"
+            class="h-8 w-8 rounded-full"
+          />
+          <span class="font-headline">ACE Ventures</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 py-24 text-center">
+      <h1 class="text-4xl md:text-5xl font-headline mb-6">
         We move with intention
       </h1>
-      <p class="text-xl md:text-2xl font-light mb-8">
+      <p class="text-xl md:text-2xl font-light mb-10">
         Thank you for your note. If the alignment is clear, we’ll respond with
         care.
       </p>
-      <a
-        href="/"
-        class="inline-block py-3 px-6 bg-text-primary text-white rounded-[10px] hover:bg-opacity-90 transition-colors"
-      >
-        Return to site
-      </a>
-    </div>
+
+      <div class="flex items-center justify-center gap-4">
+        <a
+          href="/"
+          class="inline-flex items-center px-6 py-3 bg-text-primary text-white rounded-[10px] hover:bg-opacity-90 transition-colors"
+        >
+          Return to site
+        </a>
+        <a
+          href="mailto:hello@aceventures.ai"
+          class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-[10px] hover:border-accent-gold hover:text-accent-gold transition-colors"
+        >
+          Contact us
+        </a>
+      </div>
+    </main>
   </body>
 </html>
