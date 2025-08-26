@@ -431,26 +431,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Performance: respect reduced motion and small screens for video
-  const video = document.getElementById("hero-video");
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-  if (video) {
-    const smallScreen = () => window.matchMedia("(max-width: 640px)").matches;
-    function updateVideoState() {
-      if (prefersReduced.matches || smallScreen()) {
-        try {
-          video.pause();
-        } catch (_) {}
-      }
-    }
-    updateVideoState();
-    prefersReduced.addEventListener?.("change", updateVideoState);
-    window.addEventListener(
-      "resize",
-      () => {
-        // throttle via rAF
-        window.requestAnimationFrame(updateVideoState);
-      },
-      { passive: true }
-    );
-  }
 });
