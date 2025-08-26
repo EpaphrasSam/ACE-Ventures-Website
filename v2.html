@@ -66,11 +66,10 @@
   <body class="bg-bg-primary text-text-primary font-body antialiased">
     <!-- Navigation Header -->
     <nav
-      id="site-nav"
-      class="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-0 border-b border-transparent transition-all duration-300"
+      class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="relative flex justify-between items-center h-16">
+        <div class="flex justify-between items-center h-16">
           <!-- Logo -->
           <a href="#hero" id="logo-link" class="flex items-center space-x-2">
             <img
@@ -83,30 +82,27 @@
             >
           </a>
 
-          <!-- Desktop Navigation (centered) -->
-          <div
-            id="desktop-nav"
-            class="hidden md:flex items-center space-x-8 absolute left-1/2 -translate-x-1/2"
-          >
+          <!-- Desktop Navigation -->
+          <div class="hidden md:flex items-center space-x-8">
             <a
               href="#about"
-              class="text-sm font-medium text-white hover:text-accent-gold transition-colors"
-              >Escape</a
+              class="text-sm font-medium text-gray-700 hover:text-accent-gold transition-colors"
+              >About</a
             >
             <a
               href="#approach"
-              class="text-sm font-medium text-white hover:text-accent-gold transition-colors"
-              >Best new practices</a
+              class="text-sm font-medium text-gray-700 hover:text-accent-gold transition-colors"
+              >Approach</a
             >
             <a
               href="#innovation"
-              class="text-sm font-medium text-white hover:text-accent-gold transition-colors"
-              >Innovation & Effects</a
+              class="text-sm font-medium text-gray-700 hover:text-accent-gold transition-colors"
+              >Innovation</a
             >
             <a
               href="#contact"
-              class="text-sm font-medium text-white hover:text-accent-gold transition-colors"
-              >If you know you know</a
+              class="text-sm font-medium text-gray-700 hover:text-accent-gold transition-colors"
+              >Contact</a
             >
           </div>
 
@@ -143,22 +139,22 @@
           <a
             href="#about"
             class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-accent-gold"
-            >Escape</a
+            >About</a
           >
           <a
             href="#approach"
             class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-accent-gold"
-            >Best new practices</a
+            >Approach</a
           >
           <a
             href="#innovation"
             class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-accent-gold"
-            >Innovation & Effects</a
+            >Innovation</a
           >
           <a
             href="#contact"
             class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-accent-gold"
-            >If you know you know</a
+            >Contact</a
           >
         </div>
       </div>
@@ -173,7 +169,6 @@
       <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white">
         <!-- Video background -->
         <video
-          id="hero-video"
           class="absolute inset-0 w-full h-full object-cover opacity-100"
           autoplay
           muted
@@ -181,7 +176,7 @@
           playsinline
         >
           <source
-            src="https://cdn.pixabay.com/video/2024/05/08/211200_large.mp4"
+            src="https://media.istockphoto.com/id/1474001778/video/clients-meeting-black-woman-and-tablet-for-business-proposal-negotiation-strategy-or.mp4?s=mp4-640x640-is&k=20&c=oSFKXkFOp_FTcc7k7riI2oQtWGuEkcygSym3UrIBFSM="
             type="video/mp4"
           />
           <!-- Fallback background image -->
@@ -212,10 +207,10 @@
         <!-- CTA Button -->
         <div class="opacity-0 animate-fadeIn" style="animation-delay: 1s">
           <a
-            href="#contact"
-            class="inline-flex items-center px-8 py-4 bg-accent-gold text-text-primary font-medium rounded-[10px] shadow-md hover:shadow-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105"
+            href="#about"
+            class="inline-flex items-center px-8 py-4 bg-accent-gold text-text-primary font-medium rounded-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105"
           >
-            Start a conversation
+            Discover Our Approach
             <svg
               class="ml-2 w-5 h-5"
               fill="none"
@@ -233,22 +228,26 @@
         </div>
       </div>
 
-      <!-- Hero Video Toggle -->
-      <button
-        id="hero-video-toggle"
-        aria-label="Pause background video"
-        class="absolute bottom-6 right-6 z-20 inline-flex items-center px-2 py-2 bg-transparent border border-white/70 text-white hover:bg-white/10 transition-colors"
+      <!-- Bouncing Chevron Arrow -->
+      <div
+        id="scroll-arrow"
+        class="absolute bottom-8 opacity-0 animate-fadeIn transition-opacity duration-300"
+        style="animation-delay: 1.5s"
       >
         <svg
-          id="hero-video-toggle-icon"
-          class="w-5 h-5"
+          class="w-6 h-6 text-gray-600 animate-bounce"
+          fill="none"
+          stroke="currentColor"
           viewBox="0 0 24 24"
-          fill="currentColor"
-          aria-hidden="true"
         >
-          <path d="M8 5v14l11-7z" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 13l5 5 5-5"
+          ></path>
         </svg>
-      </button>
+      </div>
     </section>
 
     <!-- About Section -->
@@ -260,12 +259,9 @@
         <div class="grid lg:grid-cols-2 gap-16 items-center">
           <!-- Content -->
           <div data-aos="fade-right">
-            <h2 class="text-4xl md:text-5xl font-headline font-medium mb-2">
-              Escape
-            </h2>
-            <p class="text-2xl md:text-3xl font-headline text-gray-800 mb-6">
+            <h2 class="text-4xl md:text-5xl font-headline font-medium mb-8">
               Efficiency is Innovation
-            </p>
+            </h2>
             <p class="text-xl font-light leading-relaxed mb-8 text-gray-700">
               ACE Ventures partners with aligned capital to turn efficiency into
               innovation and lasting value through strategic discipline and
@@ -316,7 +312,7 @@
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16" data-aos="fade-up">
           <h2 class="text-4xl md:text-5xl font-headline font-medium mb-8">
-            Best new practices
+            Our Approach
           </h2>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto">
             Three fundamental principles that guide every decision and
@@ -334,8 +330,7 @@
             <div
               class="w-16 h-16 bg-gradient-to-br from-accent-gold to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
             >
-              <span
-                class="text-text-primary font-headline font-medium text-xl transition-transform duration-700 group-hover:rotate-[360deg]"
+              <span class="text-text-primary font-headline font-medium text-xl"
                 >C</span
               >
             </div>
@@ -364,8 +359,7 @@
             <div
               class="w-16 h-16 bg-gradient-to-br from-accent-gold to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
             >
-              <span
-                class="text-text-primary font-headline font-medium text-xl transition-transform duration-700 group-hover:rotate-[360deg]"
+              <span class="text-text-primary font-headline font-medium text-xl"
                 >A</span
               >
             </div>
@@ -394,8 +388,7 @@
             <div
               class="w-16 h-16 bg-gradient-to-br from-accent-gold to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
             >
-              <span
-                class="text-text-primary font-headline font-medium text-xl transition-transform duration-700 group-hover:rotate-[360deg]"
+              <span class="text-text-primary font-headline font-medium text-xl"
                 >I</span
               >
             </div>
@@ -601,7 +594,7 @@
         <div class="grid md:grid-cols-2 gap-12 mb-16">
           <div data-aos="fade-right">
             <h3 class="text-3xl font-headline font-medium mb-6">
-              If you know you know
+              Get in Touch
             </h3>
             <p class="text-gray-300 mb-8 leading-relaxed">
               If our philosophy resonates, share context. We review each note

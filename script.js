@@ -15,17 +15,25 @@ function showToast(title, message, type = "success") {
     "bg-red-500",
     "bg-accent-gold",
     "bg-ocean-black",
+    "bg-white",
     "text-white",
-    "text-text-primary"
+    "text-text-primary",
+    "border",
+    "border-accent-gold"
   );
   toast.classList.add("opacity-100", "scale-100");
 
   // Set color based on type
   if (type === "error") {
-    toast.classList.add("bg-red-500", "text-white");
+    toast.classList.add("bg-red-500", "text-white", "border");
   } else {
-    // Use ocean-black for success/info to avoid gold overuse
-    toast.classList.add("bg-ocean-black", "text-white");
+    // High-contrast on dark footer: white bg with gold border and dark text
+    toast.classList.add(
+      "bg-white",
+      "text-text-primary",
+      "border",
+      "border-accent-gold"
+    );
   }
 
   // Show toast
@@ -90,46 +98,156 @@ function smoothScrollTo(targetId) {
   }
 }
 
-// Scroll Arrow Visibility Logic
-function handleScrollArrowVisibility() {
-  const scrollArrow = document.getElementById("scroll-arrow");
-  const heroSection = document.getElementById("hero");
+// Nav appearance updater
+function updateNavAppearance(scrolled) {
+  const nav = document.getElementById("site-nav");
+  if (!nav) return;
+  const desktopNav = document.getElementById("desktop-nav");
+  const desktopLinks = desktopNav ? desktopNav.querySelectorAll("a") : [];
+  const logoText = nav.querySelector("span");
 
-  if (!scrollArrow || !heroSection) return;
+  if (scrolled) {
+    // Transparent state cleanup (including any gradient leftovers)
+    nav.classList.remove(
+      "bg-transparent",
+      "backdrop-blur-0",
+      "border-transparent",
+      "bg-gradient-to-b",
+      "from-black/20",
+      "via-black/10",
+      "to-transparent"
+    );
+    // Restore blurred glass with shadow and subtle border
+    nav.classList.add(
+      "bg-white/70",
+      "backdrop-blur-lg",
+      "backdrop-saturate-150",
+      "border-gray-100",
+      "shadow-md"
+    );
 
-  const heroRect = heroSection.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
-
-  if (heroRect.top <= 0 && heroRect.bottom >= windowHeight) {
-    scrollArrow.style.opacity = "1";
+    desktopLinks.forEach((link) => {
+      link.classList.remove("text-white");
+      link.classList.add("text-text-primary");
+    });
+    if (logoText) {
+      logoText.classList.remove("text-white");
+      logoText.classList.add("text-text-primary");
+    }
   } else {
-    scrollArrow.style.opacity = "0";
+    // Remove scrolled styles
+    nav.classList.remove(
+      "bg-white/70",
+      "backdrop-blur-lg",
+      "backdrop-saturate-150",
+      "border-gray-100",
+      "shadow-md"
+    );
+    // Restore simple transparent state
+    nav.classList.add(
+      "bg-transparent",
+      "backdrop-blur-0",
+      "border-transparent"
+    );
+
+    desktopLinks.forEach((link) => {
+      link.classList.remove("text-text-primary");
+      link.classList.add("text-white");
+    });
+    if (logoText) {
+      logoText.classList.remove("text-text-primary");
+      logoText.classList.add("text-white");
+    }
   }
+}
+
+// rAF-throttled scroll handler
+let navTicking = false;
+function onScrollUpdateNav() {
+  if (!navTicking) {
+    navTicking = true;
+    window.requestAnimationFrame(() => {
+      const scrolled = window.scrollY > 0;
+      updateNavAppearance(scrolled);
+      navTicking = false;
+    });
+  }
+}
+
+// Initial handler (kept for direct calls)
+function handleNavBlend() {
+  const scrolled = window.scrollY > 0;
+  updateNavAppearance(scrolled);
+}
+
+// Hero video play/pause toggle
+function setupHeroVideoToggle() {
+  const video = document.getElementById("hero-video");
+  const toggle = document.getElementById("hero-video-toggle");
+  const icon = document.getElementById("hero-video-toggle-icon");
+  if (!video || !toggle || !icon) return;
+
+  function setPausedUI(paused) {
+    if (paused) {
+      icon.setAttribute("viewBox", "0 0 24 24");
+      icon.innerHTML = '<path d="M8 5v14l11-7z"/>'; // show Play icon when paused
+      toggle.setAttribute("aria-label", "Play background video");
+    } else {
+      icon.setAttribute("viewBox", "0 0 24 24");
+      icon.innerHTML = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>'; // show Pause icon when playing
+      toggle.setAttribute("aria-label", "Pause background video");
+    }
+  }
+
+  // Reflect actual state from video events
+  video.addEventListener("play", () => setPausedUI(false));
+  video.addEventListener("pause", () => setPausedUI(true));
+  video.addEventListener("ended", () => setPausedUI(true));
+  video.addEventListener("loadeddata", () => setPausedUI(video.paused));
+
+  // Initialize on setup in case events haven't fired yet
+  setPausedUI(video.paused);
+
+  // Toggle only playback; UI will sync via events
+  toggle.addEventListener("click", () => {
+    try {
+      if (video.paused) {
+        const p = video.play();
+        if (p && typeof p.then === "function") {
+          p.catch(() => {});
+        }
+      } else {
+        video.pause();
+      }
+    } catch (e) {
+      console.error("Hero video toggle error", e);
+    }
+  });
 }
 
 // Form Handling for Local and Production
 document
   .getElementById("contact-form")
   .addEventListener("submit", function (e) {
-    // Check if we're in local development
+    const form = this;
+    // Determine local vs production
     const isLocal =
       window.location.protocol === "file:" ||
       window.location.hostname === "localhost" ||
       window.location.hostname === "127.0.0.1" ||
       window.location.hostname === "";
 
-    if (isLocal) {
-      e.preventDefault();
-      showLoader();
+    // Always handle inline to avoid page navigation; keep action as a no-JS fallback
+    e.preventDefault();
+    showLoader();
 
+    if (isLocal) {
       // Simulate form submission for local testing
       setTimeout(() => {
         try {
-          // Clear form
-          this.querySelectorAll("input, textarea").forEach(
-            (el) => (el.value = "")
-          );
-
+          form
+            .querySelectorAll("input, textarea")
+            .forEach((el) => (el.value = ""));
           hideLoader();
           showToast(
             "We Move with Intention",
@@ -145,14 +263,56 @@ document
           );
           console.error("Local form submission error:", error);
         }
-      }, 1500);
-    } else {
-      // For production/Netlify deployment
-      showLoader();
+      }, 1200);
+      return;
+    }
 
-      setTimeout(() => {
-        hideLoader();
-      }, 2000);
+    // Production: Submit to Netlify via fetch for inline success
+    try {
+      const formData = new FormData(form);
+      // Ensure form-name is present (hidden input already exists in HTML)
+      if (!formData.get("form-name")) {
+        const nameInput = form.querySelector('input[name="form-name"]');
+        if (nameInput && nameInput.value)
+          formData.set("form-name", nameInput.value);
+      }
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      })
+        .then((res) => {
+          // Netlify returns the hosting page; treat 200-299 as success
+          if (!res.ok)
+            throw new Error(`Netlify submission failed: ${res.status}`);
+          form
+            .querySelectorAll("input, textarea")
+            .forEach((el) => (el.value = ""));
+          hideLoader();
+          showToast(
+            "We Move with Intention",
+            "Your message has been received. We appreciate your alignment.",
+            "success"
+          );
+        })
+        .catch((error) => {
+          console.error("Production form submission error:", error);
+          hideLoader();
+          showToast(
+            "Submission Error",
+            "There was an error submitting your form. Please try again.",
+            "error"
+          );
+        });
+    } catch (error) {
+      console.error("Unexpected submission error:", error);
+      hideLoader();
+      showToast(
+        "Submission Error",
+        "There was an error submitting your form. Please try again.",
+        "error"
+      );
     }
   });
 
@@ -162,12 +322,13 @@ AOS.init({
   once: true,
 });
 
-// Add scroll event listener for arrow visibility
-window.addEventListener("scroll", handleScrollArrowVisibility);
+// Ensure nav updates on scroll
+window.addEventListener("scroll", onScrollUpdateNav, { passive: true });
 
-// Initial check for arrow visibility
+// Init
 document.addEventListener("DOMContentLoaded", function () {
-  handleScrollArrowVisibility();
+  handleNavBlend();
+  setupHeroVideoToggle();
 
   // Mobile menu toggle
   const mobileMenuButton = document.getElementById("mobile-menu-button");
@@ -185,7 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Close mobile menu if open
       const mobileMenu = document.getElementById("mobile-menu");
-      if (!mobileMenu.classList.contains("hidden")) {
+      if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
         toggleMobileMenu();
       }
     });
