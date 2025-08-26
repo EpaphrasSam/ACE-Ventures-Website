@@ -931,18 +931,6 @@
     <script src="script.js"></script>
 
     <style>
-      @media (max-width: 768px) {
-        section:not(#hero) {
-          margin: 12vh 5vw !important;
-        }
-      }
-
-      @media (min-width: 769px) {
-        section:not(#hero) {
-          margin: 25vh auto !important;
-        }
-      }
-
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -966,6 +954,17 @@
       video {
         object-fit: cover;
         object-position: center;
+      }
+
+      /* Mobile overflow prevention */
+      body {
+        overflow-x: hidden;
+      }
+
+      /* Ensure sections don't overflow on mobile */
+      section {
+        max-width: 100vw;
+        overflow-x: hidden;
       }
     </style>
   </body>
