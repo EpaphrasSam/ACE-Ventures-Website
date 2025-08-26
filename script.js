@@ -112,6 +112,7 @@ function updateNavAppearance(scrolled) {
   const desktopLinks = desktopNav ? desktopNav.querySelectorAll("a") : [];
   const logoText = nav.querySelector("span");
   const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const heroToggle = document.getElementById("hero-video-toggle");
 
   if (scrolled) {
     // Transparent state cleanup (including any gradient leftovers)
@@ -145,6 +146,10 @@ function updateNavAppearance(scrolled) {
       mobileMenuButton.classList.remove("text-white", "text-gray-700");
       mobileMenuButton.classList.add("text-text-primary");
     }
+    if (heroToggle) {
+      heroToggle.classList.remove("text-white", "border-white/70");
+      heroToggle.classList.add("text-text-primary", "border-gray-700");
+    }
   } else {
     // Remove scrolled styles
     nav.classList.remove(
@@ -172,6 +177,10 @@ function updateNavAppearance(scrolled) {
     if (mobileMenuButton) {
       mobileMenuButton.classList.remove("text-text-primary", "text-gray-700");
       mobileMenuButton.classList.add("text-white");
+    }
+    if (heroToggle) {
+      heroToggle.classList.remove("text-text-primary", "border-gray-700");
+      heroToggle.classList.add("text-white", "border-white/70");
     }
   }
 
@@ -429,6 +438,4 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
-
-  // Performance: respect reduced motion and small screens for video
 });
