@@ -76,7 +76,7 @@
       id="site-nav"
       class="fixed top-0 left-0 right-0 z-[70] bg-transparent backdrop-blur-0 border-b border-transparent transition-all duration-300"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div class="relative flex justify-between items-center h-16">
           <!-- Logo -->
           <a href="#hero" id="logo-link" class="flex items-center space-x-2">
@@ -93,7 +93,7 @@
           <!-- Desktop Navigation (centered) -->
           <div
             id="desktop-nav"
-            class="hidden xl:flex items-center space-x-8 absolute left-1/2 -translate-x-1/2"
+            class="hidden xl:flex items-center space-x-8 absolute left-1/2 -translate-x-1/2 max-w-full"
           >
             <a
               href="#about"
@@ -144,7 +144,7 @@
       <!-- Mobile Navigation -->
       <div
         id="mobile-menu"
-        class="hidden xl:hidden fixed top-16 inset-x-0 z-[60] bg-black/70 backdrop-blur-sm shadow-lg"
+        class="hidden xl:hidden fixed top-16 left-0 right-0 z-[60] bg-black/70 backdrop-blur-sm shadow-lg"
       >
         <div
           class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-3 space-y-1 divide-y divide-white/10"
@@ -176,7 +176,7 @@
     <!-- Hero Section with Background -->
     <section
       id="hero"
-      class="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden"
+      class="relative min-h-[100svh] flex flex-col items-center justify-center text-center"
     >
       <!-- Background Video -->
       <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white">
@@ -195,10 +195,6 @@
             src="https://cdn.pixabay.com/video/2024/05/08/211200_large.mp4"
             type="video/mp4"
           />
-          <!-- Fallback background image -->
-          <div
-            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-10"
-          ></div>
         </video>
         <!-- Overlay to improve text contrast -->
         <div
@@ -251,7 +247,7 @@
       <button
         id="hero-video-toggle"
         aria-label="Pause background video"
-        class="absolute bottom-6 right-6 z-20 inline-flex items-center px-2 py-2 bg-transparent border border-white/70 text-white hover:bg-white/10 transition-colors"
+        class="absolute bottom-4 right-4 md:bottom-6 md:right-6 z-20 inline-flex items-center px-2 py-2 bg-transparent border border-white/70 text-white hover:bg-white/10 transition-colors"
       >
         <svg
           id="hero-video-toggle-icon"
@@ -328,7 +324,7 @@
               ></div>
             </div>
             <div
-              class="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-lg p-6 max-w-xs"
+              class="absolute bottom-0 left-0 md:-bottom-6 md:-left-6 bg-white rounded-lg shadow-lg p-4 md:p-6 max-w-xs mx-4 md:mx-0"
             >
               <p class="text-sm text-gray-600 italic">
                 "We don't build companies. We build systems that endure."
@@ -957,8 +953,10 @@
       }
 
       /* Mobile overflow prevention */
+      html,
       body {
         overflow-x: hidden;
+        max-width: 100vw;
       }
 
       /* Ensure sections don't overflow on mobile */

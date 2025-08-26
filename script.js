@@ -146,10 +146,7 @@ function updateNavAppearance(scrolled) {
       mobileMenuButton.classList.remove("text-white", "text-gray-700");
       mobileMenuButton.classList.add("text-text-primary");
     }
-    if (heroToggle) {
-      heroToggle.classList.remove("text-white", "border-white/70");
-      heroToggle.classList.add("text-text-primary", "border-gray-700");
-    }
+    // Hero toggle button should always stay white - no color changes
   } else {
     // Remove scrolled styles
     nav.classList.remove(
@@ -178,10 +175,7 @@ function updateNavAppearance(scrolled) {
       mobileMenuButton.classList.remove("text-text-primary", "text-gray-700");
       mobileMenuButton.classList.add("text-white");
     }
-    if (heroToggle) {
-      heroToggle.classList.remove("text-text-primary", "border-gray-700");
-      heroToggle.classList.add("text-white", "border-white/70");
-    }
+    // Hero toggle button should always stay white - no color changes
   }
 
   // If mobile menu is open, keep its theme in sync with scroll state
