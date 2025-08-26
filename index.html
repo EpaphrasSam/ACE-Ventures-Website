@@ -31,6 +31,13 @@
       content="https://aceventuresai.netlify.app/assets/og-image.svg"
     />
 
+    <!-- Mobile UI color -->
+    <meta name="theme-color" content="#001F2D" />
+
+    <!-- Performance: font preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -67,7 +74,7 @@
     <!-- Navigation Header -->
     <nav
       id="site-nav"
-      class="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-0 border-b border-transparent transition-all duration-300"
+      class="fixed top-0 left-0 right-0 z-[70] bg-transparent backdrop-blur-0 border-b border-transparent transition-all duration-300"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative flex justify-between items-center h-16">
@@ -86,7 +93,7 @@
           <!-- Desktop Navigation (centered) -->
           <div
             id="desktop-nav"
-            class="hidden md:flex items-center space-x-8 absolute left-1/2 -translate-x-1/2"
+            class="hidden xl:flex items-center space-x-8 absolute left-1/2 -translate-x-1/2"
           >
             <a
               href="#about"
@@ -111,7 +118,7 @@
           </div>
 
           <!-- Mobile menu button -->
-          <div class="md:hidden">
+          <div class="xl:hidden">
             <button
               id="mobile-menu-button"
               class="text-gray-700 hover:text-accent-gold"
@@ -137,27 +144,29 @@
       <!-- Mobile Navigation -->
       <div
         id="mobile-menu"
-        class="hidden md:hidden bg-white border-t border-gray-100"
+        class="hidden xl:hidden fixed top-16 inset-x-0 z-[60] bg-black/70 backdrop-blur-sm shadow-lg"
       >
-        <div class="px-2 pt-2 pb-3 space-y-1">
+        <div
+          class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-3 space-y-1 divide-y divide-white/10"
+        >
           <a
             href="#about"
-            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-accent-gold"
+            class="block px-3 py-3 text-base font-medium text-white hover:text-accent-gold"
             >Escape</a
           >
           <a
             href="#approach"
-            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-accent-gold"
+            class="block px-3 py-3 text-base font-medium text-white hover:text-accent-gold"
             >Best new practices</a
           >
           <a
             href="#innovation"
-            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-accent-gold"
+            class="block px-3 py-3 text-base font-medium text-white hover:text-accent-gold"
             >Innovation & Effects</a
           >
           <a
             href="#contact"
-            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-accent-gold"
+            class="block px-3 py-3 text-base font-medium text-white hover:text-accent-gold"
             >If you know you know</a
           >
         </div>
@@ -179,6 +188,8 @@
           muted
           loop
           playsinline
+          preload="metadata"
+          poster="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
         >
           <source
             src="https://cdn.pixabay.com/video/2024/05/08/211200_large.mp4"
@@ -315,9 +326,10 @@
     <section id="approach" class="py-20 md:py-32 bg-white">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16" data-aos="fade-up">
-          <h2 class="text-4xl md:text-5xl font-headline font-medium mb-8">
+          <h2 class="text-4xl md:text-5xl font-headline font-medium mb-4">
             Best new practices
           </h2>
+          <div class="w-16 h-[3px] bg-accent-gold mx-auto rounded mb-8"></div>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto">
             Three fundamental principles that guide every decision and
             partnership we make.
@@ -332,7 +344,7 @@
             data-aos-delay="100"
           >
             <div
-              class="w-16 h-16 bg-gradient-to-br from-accent-gold to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
+              class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 border border-accent-gold bg-white/80"
             >
               <span
                 class="text-text-primary font-headline font-medium text-xl transition-transform duration-700 group-hover:rotate-[360deg]"
@@ -362,7 +374,7 @@
             data-aos-delay="200"
           >
             <div
-              class="w-16 h-16 bg-gradient-to-br from-accent-gold to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
+              class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 border border-accent-gold bg-white/80"
             >
               <span
                 class="text-text-primary font-headline font-medium text-xl transition-transform duration-700 group-hover:rotate-[360deg]"
@@ -392,7 +404,7 @@
             data-aos-delay="300"
           >
             <div
-              class="w-16 h-16 bg-gradient-to-br from-accent-gold to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
+              class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 border border-accent-gold bg-white/80"
             >
               <span
                 class="text-text-primary font-headline font-medium text-xl transition-transform duration-700 group-hover:rotate-[360deg]"
@@ -425,9 +437,10 @@
     >
       <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-16" data-aos="fade-up">
-          <h2 class="text-4xl md:text-5xl font-headline font-medium mb-8">
+          <h2 class="text-4xl md:text-5xl font-headline font-medium mb-4">
             Innovation & Effects
           </h2>
+          <div class="w-16 h-[3px] bg-accent-gold mx-auto rounded mb-8"></div>
           <p class="text-xl text-gray-600 max-w-4xl mx-auto">
             We recommend AI tools to improve efficiency while ensuring security,
             efficiency and growth.
@@ -442,10 +455,10 @@
           >
             <!-- Security Icon -->
             <div
-              class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+              class="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-accent-gold bg-white"
             >
               <svg
-                class="w-10 h-10 text-white"
+                class="w-10 h-10 text-text-primary"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -472,10 +485,10 @@
           >
             <!-- Efficiency Icon -->
             <div
-              class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+              class="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-accent-gold bg-white"
             >
               <svg
-                class="w-10 h-10 text-white"
+                class="w-10 h-10 text-text-primary"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -508,10 +521,10 @@
           >
             <!-- Growth Icon -->
             <div
-              class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+              class="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-accent-gold bg-white"
             >
               <svg
-                class="w-10 h-10 text-white"
+                class="w-10 h-10 text-text-primary"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -786,6 +799,26 @@
                   class="w-full px-4 py-3 border border-gray-600 rounded-[10px] h-32 focus:outline-none focus:ring-2 focus:ring-accent-gold focus:border-accent-gold bg-transparent text-white placeholder-gray-400"
                 ></textarea>
               </div>
+
+              <!-- Developer preview toggle -->
+              <div class="flex items-center justify-between">
+                <label
+                  class="inline-flex items-center space-x-2 text-sm text-gray-400"
+                >
+                  <input
+                    id="show-json"
+                    type="checkbox"
+                    class="rounded border-gray-500 bg-transparent"
+                  />
+                  <span>Show JSON</span>
+                </label>
+              </div>
+
+              <!-- Live JSON mirror of the brief -->
+              <pre
+                id="footer-brief-json"
+                class="hidden mt-2 p-4 rounded-[10px] bg-ocean-black text-white text-xs overflow-auto"
+              ></pre>
 
               <button
                 type="submit"

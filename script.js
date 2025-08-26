@@ -66,6 +66,12 @@ function hideLoader() {
 function toggleMobileMenu() {
   const mobileMenu = document.getElementById("mobile-menu");
   const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const scrolled = window.scrollY > 0;
+
+  // Ensure theme matches current scroll state when opening
+  if (mobileMenu && mobileMenu.classList.contains("hidden")) {
+    updateMobileMenuTheme(scrolled);
+  }
 
   if (mobileMenu.classList.contains("hidden")) {
     mobileMenu.classList.remove("hidden");
@@ -105,6 +111,7 @@ function updateNavAppearance(scrolled) {
   const desktopNav = document.getElementById("desktop-nav");
   const desktopLinks = desktopNav ? desktopNav.querySelectorAll("a") : [];
   const logoText = nav.querySelector("span");
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
 
   if (scrolled) {
     // Transparent state cleanup (including any gradient leftovers)
@@ -134,6 +141,10 @@ function updateNavAppearance(scrolled) {
       logoText.classList.remove("text-white");
       logoText.classList.add("text-text-primary");
     }
+    if (mobileMenuButton) {
+      mobileMenuButton.classList.remove("text-white", "text-gray-700");
+      mobileMenuButton.classList.add("text-text-primary");
+    }
   } else {
     // Remove scrolled styles
     nav.classList.remove(
@@ -158,6 +169,16 @@ function updateNavAppearance(scrolled) {
       logoText.classList.remove("text-text-primary");
       logoText.classList.add("text-white");
     }
+    if (mobileMenuButton) {
+      mobileMenuButton.classList.remove("text-text-primary", "text-gray-700");
+      mobileMenuButton.classList.add("text-white");
+    }
+  }
+
+  // If mobile menu is open, keep its theme in sync with scroll state
+  const mobileMenu = document.getElementById("mobile-menu");
+  if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+    updateMobileMenuTheme(scrolled);
   }
 }
 
@@ -178,6 +199,35 @@ function onScrollUpdateNav() {
 function handleNavBlend() {
   const scrolled = window.scrollY > 0;
   updateNavAppearance(scrolled);
+}
+
+// Mobile menu theming based on scroll state
+function updateMobileMenuTheme(scrolled) {
+  const mobileMenu = document.getElementById("mobile-menu");
+  if (!mobileMenu) return;
+  // Inner container holds the links
+  const inner = mobileMenu.querySelector("div");
+  const links = inner ? inner.querySelectorAll("a") : [];
+
+  if (scrolled) {
+    // Scrolled: solid white dropdown, dark text links
+    mobileMenu.classList.remove("bg-black/70", "backdrop-blur-sm");
+    mobileMenu.classList.add("bg-white");
+    if (inner) inner.classList.remove("divide-white/10");
+    links.forEach((a) => {
+      a.classList.remove("text-white");
+      a.classList.add("text-text-primary");
+    });
+  } else {
+    // At top: translucent dark overlay, white links
+    mobileMenu.classList.remove("bg-white");
+    mobileMenu.classList.add("bg-black/70", "backdrop-blur-sm");
+    if (inner) inner.classList.add("divide-white/10");
+    links.forEach((a) => {
+      a.classList.remove("text-text-primary");
+      a.classList.add("text-white");
+    });
+  }
 }
 
 // Hero video play/pause toggle
@@ -318,7 +368,7 @@ document
 
 // Initialize AOS animations
 AOS.init({
-  duration: 800,
+  duration: 250,
   once: true,
 });
 
@@ -351,4 +401,56 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // Footer JSON preview (developer-style) for the main contact form
+  const footerForm = document.getElementById("contact-form");
+  const footerShowJson = document.getElementById("show-json");
+  const footerJsonPre = document.getElementById("footer-brief-json");
+
+  function refreshFooterJson() {
+    if (!footerForm || !footerJsonPre) return;
+    const data = {
+      name: footerForm.elements?.namedItem("name")?.value || "",
+      email: footerForm.elements?.namedItem("email")?.value || "",
+      message: footerForm.elements?.namedItem("message")?.value || "",
+    };
+    footerJsonPre.textContent = JSON.stringify(data, null, 2);
+  }
+
+  if (footerShowJson && footerJsonPre && footerForm) {
+    footerShowJson.addEventListener("change", () => {
+      const on = footerShowJson.checked;
+      footerJsonPre.classList.toggle("hidden", !on);
+      if (on) refreshFooterJson();
+    });
+    ["input", "keyup", "change"].forEach((ev) => {
+      footerForm.addEventListener(ev, () => {
+        if (!footerJsonPre.classList.contains("hidden")) refreshFooterJson();
+      });
+    });
+  }
+
+  // Performance: respect reduced motion and small screens for video
+  const video = document.getElementById("hero-video");
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (video) {
+    const smallScreen = () => window.matchMedia("(max-width: 640px)").matches;
+    function updateVideoState() {
+      if (prefersReduced.matches || smallScreen()) {
+        try {
+          video.pause();
+        } catch (_) {}
+      }
+    }
+    updateVideoState();
+    prefersReduced.addEventListener?.("change", updateVideoState);
+    window.addEventListener(
+      "resize",
+      () => {
+        // throttle via rAF
+        window.requestAnimationFrame(updateVideoState);
+      },
+      { passive: true }
+    );
+  }
 });
